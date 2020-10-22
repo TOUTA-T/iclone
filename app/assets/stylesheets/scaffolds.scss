@@ -114,3 +114,16 @@ label {
   background-color:#000066;
   color: white;
 }
+// 投稿画面の設定
+.field input{
+  width: 500px;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.field textarea{
+  width: 500px;
+  height: auto;
+  padding: 5px;
+  margin-bottom: 10px;
+}
