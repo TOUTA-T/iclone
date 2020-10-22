@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
  gem 'mini_magick'
  gem 'carrierwave'
  gem 'dotenv-rails'
+ gem 'faker'
 
  group :development do
    gem 'letter_opener_web'
