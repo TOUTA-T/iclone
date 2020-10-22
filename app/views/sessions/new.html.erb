@@ -1,0 +1,12 @@
+<body class=instpage>
+  <div id="icon">
+    <%= link_to image_tag('insticon.png'), posts_path, class:"icon" %>
+  </div>
+  <div class="login">
+    <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+      <%= f.email_field :email, placeholder:"メールアドレスを入力" %><br>
+      <%= f.password_field :password, placeholder:"パスワードを入力" %><br>
+      <%= f.submit "Log in", class:"button" %>
+    <% end %>
+  </div>
+</body>

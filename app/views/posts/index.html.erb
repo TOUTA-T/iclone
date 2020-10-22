@@ -1,33 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
+<body class="toppage">
+<h1>投稿一覧</h1>
+<table class="table table-bordered">
   <thead>
-    <tr>
+    <tr class="index">
       <th>Title</th>
       <th>Content</th>
-      <th>Image</th>
-      <th>User</th>
+      <th>作成者</th>
+      <th>画像</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
-        <td><%= post.image %></td>
-        <td><%= post.user %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= post.user.name %></td>
+        <td><%= image_tag post.image.url%></td>
+        <td><%= link_to '詳細確認', post %></td>
+        <td><%= link_to '編集', edit_post_path(post) %></td>
+        <td><%= link_to '削除', post, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+</body>

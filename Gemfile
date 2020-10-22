@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.5'
  gem 'bcrypt'
  gem 'mini_magick'
  gem 'carrierwave'
+ gem 'dotenv-rails'
 
  group :development do
    gem 'letter_opener_web'

@@ -16,20 +16,23 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save
-      PostMailer.post_mail(@post).deliver
-      redirect_to post_path, notice: '投稿されました！'
-    else
+    @post = current_user.posts.build(post_params)
+    if params[:back]
       render :new
+    else
+      if @post.save
+        redirect_to posts_path, notice: "投稿されました！"
+      else
+        render :new
+      end
     end
   end
 
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.html { redirect_to posts_path, notice: '編集は正常に行われました' }
+        format.json { render :index, status: :ok, location: @post }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -40,8 +43,18 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: '投稿を削除しました' }
       format.json { head :no_content }
+    end
+  end
+
+  def confirm
+    @post = Post.new(post_params)
+    if current_user
+      @post.user_id = current_user.id
+      render :new if @post.invalid?
+    else
+      redirect_to new_session_path, notice: 'ログインしてください'
     end
   end
 
@@ -51,6 +64,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :image, :user_id, :image_cache)
+    params.require(:post).permit(:title, :content, :image, :image_cache)
   end
 end
