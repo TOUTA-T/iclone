@@ -17,15 +17,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.save
+      PostMailer.post_mail(@post).deliver
+      redirect_to post_path, notice: '投稿されました！'
+    else
+      render :new
     end
   end
 
@@ -50,11 +46,11 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :content, :image, :user_id, :image_cache)
-    end
+  def post_params
+    params.require(:post).permit(:title, :content, :image, :user_id, :image_cache)
+  end
 end

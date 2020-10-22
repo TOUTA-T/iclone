@@ -17,6 +17,10 @@ gem 'jbuilder', '~> 2.5'
  gem 'mini_magick'
  gem 'carrierwave'
 
+ group :development do
+   gem 'letter_opener_web'
+ end
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
