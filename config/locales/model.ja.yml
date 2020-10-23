@@ -15,3 +15,4 @@ ja:
         password: 6文字以上のパスワード
         password_confirmation: 確認用パスワード
         remember_me: ログインを記憶
+        introduction: プロフィール

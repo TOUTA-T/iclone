@@ -1,4 +1,41 @@
 <body class=facepage>
-<h1><%= @user.name %>のページ</h1>
-<p>メールアドレス: <%= @user.email %></p>
+  <div class="row">
+    <aside class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title"><%= @user.name %>のページ</h2>
+          <p class="bold"><%= @user.posts.count %> 件の投稿</p>
+        </div>
+        <div class="panel-body al-c">
+          <div class="media">
+            <div class="media-left">
+            <% if @user.image? %>
+            <%= link_to image_tag(@user.image.url, class:"media-object"), edit_user_path %>
+            <% else %>
+            <%= link_to image_tag('default_icon.jpg', class:"media-object"), edit_user_path %>
+            <% end %>
+            </div>
+            <div class="media-body">
+              <h3 class="media-heading">自己紹介</h3>
+              <% if @user.introduction? %>
+              <%= @user.introduction %><br><br>
+              <button type="button" class="btn btn-info">
+              <%= link_to '編集', edit_user_path %></button>
+              <% else %>
+              プロフィールを作成してください。<br><br>
+              <button type="button" class="btn btn-info">
+              <%= link_to '新規作成', edit_user_path %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="col-md-4">
+      <p class="bold">自己紹介  いざというときのためmd-4残し</p>
+
+    </div>
+  </div>
+
 </body>
