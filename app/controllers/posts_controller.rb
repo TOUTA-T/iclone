@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :autenticate_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -13,6 +14,11 @@ class PostsController < ApplicationController
   end
 
   def edit
+   if @post.user == current_user
+      render "edit"
+    else
+      redirect_to new_session_path, notice: '編集権限がありません'
+    end
   end
 
   def create

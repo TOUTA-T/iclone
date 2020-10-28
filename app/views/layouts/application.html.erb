@@ -41,6 +41,11 @@
         </div>
       </div>
     </nav>
+    <% if logged_in? %>
+      <li><%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+    <% else %>
+      <li>ゲストさん</li>
+    <% end %>
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>

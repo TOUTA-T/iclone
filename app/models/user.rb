@@ -6,5 +6,4 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
   has_many :posts
-  validates :introduction,  presence: true, length: { maximum: 140 }
 end
