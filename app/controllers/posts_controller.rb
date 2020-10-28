@@ -4,6 +4,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    # @favorite = current_user.favorites.find_by(@post) each doで回しているのでview側で条件分岐させている。
+
   end
 
   def show

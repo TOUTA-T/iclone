@@ -16,12 +16,21 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.user.name %></td>
-        <td><%= image_tag post.image.url%></td>
+        <td><%= image_tag post.image.url%>
+          <% unless post.user_id == current_user.id %>
+            <% @favorite = Favirite.where("(user_id = ?) AND (post_id = ?)", current_user.id, post.id) %>
+            <% if @favorite.present? %>
+            <%= link_to '❤解除', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+            <% else %>
+            <%= link_to '❤', favorites_path(post_id: post.id), method: :post, class: 'btn btn-primary' %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= link_to '詳細確認', post %></td>
-        <% if post.user.id == @current_user.id %>
-        <td><%= link_to '編集', edit_post_path(post) %></td>
-        <td><%= link_to '削除', post, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
-        <% else %>
+          <% if post.user.id == @current_user.id %>
+          <td><%= link_to '編集', edit_post_path(post) %></td>
+          <td><%= link_to '削除', post, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+          <% else %>
         <td></td>
         <td></td>
         <% end %>
