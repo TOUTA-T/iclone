@@ -32,20 +32,34 @@
       </div>
     </aside>
 
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <p class="bold">お気に入り画像登録数</p>
-      <%= @favorite_list.count %>件のお気に入り登録
-      <p class="bold">お気に入り画像一覧</p><br>
-      <p>ブログタイトル　　画像</p><br>
         <% if @favorite_list.present? %>
-          <% @favorite_list.each do |post| %>
-          <%= post.title %>
-          <%= image_tag post.image.url %>
-          <br>
-          <% end %>
+        <%= @favorite_list.count %>件のお気に入り登録
         <% else %>
-        <br>
+        お気に入り登録はありません
         <% end %>
+      <p class="bold">お気に入り画像一覧</p><br>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="index">
+            <th>Title</th>
+            <th>画像</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @favorite_list.present? %>
+            <% @favorite_list.each do |post| %>
+            <tr>
+            <td><%= post.title %></td>
+            <td><%= image_tag post.image.url %></td>
+            </tr>
+            <% end %>
+          <% else %>
+          <tr></tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </body>
