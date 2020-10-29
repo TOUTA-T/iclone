@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   resources :sessions, only: [:new, :create, :destroy,]
-  resources :users
-  resources :favorites, only:[:create, :destroy]
+  # お気に入りルーティング追加
+  resources :users do
+    get :favorites, on: :collection
+  end
+  resources :favorites, only:[:create, :destroy,]
 end

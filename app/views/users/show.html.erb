@@ -1,6 +1,6 @@
 <body class=facepage>
   <div class="row">
-    <aside class="col-md-8">
+    <aside class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title"><%= @user.name %>のページ</h2>
@@ -32,10 +32,20 @@
       </div>
     </aside>
 
-    <div class="col-md-4">
-      <p class="bold">自己紹介  いざというときのためmd-4残し</p>
-
+    <div class="col-md-6">
+      <p class="bold">お気に入り画像登録数</p>
+      <%= @favorite_list.count %>件のお気に入り登録
+      <p class="bold">お気に入り画像一覧</p><br>
+      <p>ブログタイトル　　画像</p><br>
+        <% if @favorite_list.present? %>
+          <% @favorite_list.each do |post| %>
+          <%= post.title %>
+          <%= image_tag post.image.url %>
+          <br>
+          <% end %>
+        <% else %>
+        <br>
+        <% end %>
     </div>
   </div>
-
 </body>
