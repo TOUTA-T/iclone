@@ -3,9 +3,10 @@ class PostsController < ApplicationController
   before_action :autenticate_user, only: [:edit, :update, :destroy]
 
   def index
+    unless current_user
+      redirect_to new_session_path, notice: 'ログインしていないと、一覧は見れません'
+    end
     @posts = Post.all
-    # @favorite = current_user.favorites.find_by(@post) each doで回しているのでview側で条件分岐させている。
-
   end
 
   def show
